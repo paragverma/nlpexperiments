@@ -28,7 +28,6 @@ def getRST(sent):
 
 	op = ""
 
-	ind += 1
 	while True:
 		if res[ind] == "\"":
 			break
