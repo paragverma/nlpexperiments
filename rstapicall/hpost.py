@@ -28,6 +28,7 @@ def getRST(sent):
 
 	op = ""
 
+	
 	while True:
 		if res[ind] == "\"":
 			break
@@ -36,3 +37,27 @@ def getRST(sent):
 		ind += 1
 		
 	return(op)
+
+def getphrase(sent, res, indexx):
+	slist = re.split(' |; |, |\:|\.|\*|\n', sent)
+	
+	#print(slist)
+	kword = slist[indexx]
+	
+	#print(kword)
+	
+	ind = res.index(kword)
+	
+	while res[ind] != "!":
+		ind += -1
+	
+	op2 = ""
+	
+	ind += 1
+	
+	while res[ind] != "_":
+		#print(res[ind])
+		op2 += res[ind]
+		ind += 1
+	
+	return(op2)
