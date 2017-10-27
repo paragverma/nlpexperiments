@@ -197,6 +197,7 @@ if __name__ == '__main__':
                 try:
                     syn_dict, best_syn = best_synonym.get_synonym(roptions[i])
                 except Exception as exception:
+					print("Exception thrown")
                     exc = True
                 
                 if exc == False and len(syn_dict) > 0:
