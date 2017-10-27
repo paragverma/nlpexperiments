@@ -152,16 +152,24 @@ if __name__ == '__main__':
     keys = ['a)', 'b)', 'c)', 'd)', 'e)']
     choices = ['a', 'b', 'c', 'd', 'e']
     prediction = []
+    
+    print("Row numbers start from 1, not 0")
+    strow = int(input("Enter starting row number: "))
+    strow += -1
+    edrow = int(input("Enter ending row number: "))
+    edrow += -1
 
     j = 0
     print("Predicting answers")
     with open(args.test_file, 'r', encoding='utf-8') as f:
         reader = csv.DictReader(f)
-        for i, row in enumerate(reader):
+        for rowi, row in enumerate(reader):
             j += 1
-            if j > 10:
-                break
-
+            #rowi = j
+            #if j > 10:
+                #break
+            if rowi < strow or rowi > edrow:
+                    continue
             question = row['question']
             translator = str.maketrans('','',string.punctuation)
             question = question.translate(translator)
@@ -215,13 +223,14 @@ if __name__ == '__main__':
             idx = scores.index(max(scores))
             ans = choices[idx]
             prediction.append(ans)
+            print(str(rowi + 1) + " : " + str(ans))
    
     output = os.path.join(args.output_dir, "prediction_rep_best.csv")
     with open(output, 'w') as out:
         writer = csv.writer(out, delimiter=',')
         writer.writerow(['id','answer'])
         for i, ans in enumerate(prediction):
-            writer.writerow([str(i+1), ans])
+            writer.writerow([str(strow+i+1), ans])
     print("Output prediction file: {}".format(output))
     
     print("Done in {:3f}s".format(time.time() - start))
