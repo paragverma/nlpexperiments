@@ -159,6 +159,7 @@ if __name__ == '__main__':
         reader = csv.DictReader(f)
         for i, row in enumerate(reader):
             j += 1
+            print("Row: " + str(j))
             #if j > 10:
                 #break
 
@@ -189,12 +190,15 @@ if __name__ == '__main__':
                 try:
                     syn_dict, best_syn = best_synonym.get_synonym(roptions[i])
                 except Exception as exception:
+                    print("Exception Occured while trying to fech best synonym")
                     exc = True
                 
                 if exc == False and len(syn_dict) > 0:
                     roptions[i] = best_syn
 
             candidates = roptions
+            
+            
 			
             # candidates is just the list of options
             
